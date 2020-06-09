@@ -57,4 +57,4 @@ The members which raised their hands up must be displayed with small hand icon n
 
 
 ### The implemented application can be tested using [these links](https://virtual--classroom.herokuapp.com/).
->`The program was written on 06/20/20`
+>`The program was written on 06/09/20`
