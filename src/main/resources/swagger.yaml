@@ -1,0 +1,129 @@
+swagger: "2.0"
+info:
+  description: "This is a simple virtual classroom server. It was developed using Spring Framework, Spring Boot, Spring Data JPA, WebSocket, SockJS, Hibernate, PostgreSQL, HikariPool, JavaScript, Thymeleaf, Bootstrap. The site has the ability to view all students in the room, authorization, there is also the opportunity to raise and lower your hand."
+  version: "1.0.0"
+  title: "Swagger Documentation"
+  contact:
+    email: "usik.nazar@gmail.com"
+    url: "https://virtual--classroom.herokuapp.com/"
+host: "virtualclassroom.herokuapp.com"
+basePath: "/"
+tags:
+  - name: "Home"
+    description: "This is the main page"
+  - name: "WebSocket"
+    description: "Operations with socket"
+  - name: "User"
+    description: "Operations about user"
+  - name: "AccessDenied"
+    description: "accessDenied"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /:
+    get:
+      tags:
+        - "Home"
+      summary: "View all users and menu"
+      description: ""
+      operationId: "allUsers"
+      responses:
+        '200':
+          description: OK
+  /login:
+    get:
+      tags:
+        - "User"
+      summary: "Show login page"
+      responses:
+        200:
+          description: OK
+  /loginUser:
+    post:
+      tags:
+        - "User"
+      summary: "Login user"
+      description: ""
+      parameters:
+        - in: "body"
+          name: "user"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+        "400":
+          description: "Invalid username"
+  /logout:
+    get:
+      tags:
+        - "User"
+      summary: "Logout user"
+      description: ""
+      responses:
+        '200':
+          description: OK
+
+
+  /accessDenied:
+    get:
+      tags:
+        - "AccessDenied"
+      summary: "accessDenied"
+      description: ""
+      responses:
+        '200':
+          description: OK
+  /sendMessage:
+    get:
+      tags:
+        - "WebSocket"
+      summary: "Request to send message"
+      parameters:
+        - in: "body"
+          name: "message"
+          required: true
+          schema:
+            $ref: '#/definitions/Message'
+      responses:
+        '200':
+          description: OK
+  /addUser:
+    put:
+      tags:
+        - "WebSocket"
+      summary: "Request to add user"
+      parameters:
+        - in: "body"
+          name: "message"
+          required: true
+          schema:
+            $ref: '#/definitions/Message'
+      responses:
+        '200':
+          description: OK
+
+  /allUsers:
+    get:
+      tags:
+        - "WebSocket"
+      summary: "Request to all users"
+      responses:
+        '200':
+          description: OK
+definitions:
+  Message:
+    type: object
+    properties:
+      type:
+        type: string
+      content:
+        type: string
+      sender:
+        type: string
+    required:
+      - type
+      - content
+      - sender
